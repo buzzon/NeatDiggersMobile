@@ -3,22 +3,166 @@
     "m_SelectedPackage": {
         "deviceId": "95YNW20806008550",
         "name": "com.DefaultCompany.NeatDiggersMobile",
-        "processId": 15923,
-        "exited": true
+        "processId": 4026,
+        "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "95YNW20806008550",
+            "name": "com.huawei.android.launcher",
+            "processId": 2075,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
             "name": "com.DefaultCompany.NeatDiggersMobile",
-            "processId": 13086,
+            "processId": 4370,
             "exited": true
         },
         {
             "deviceId": "95YNW20806008550",
             "name": "com.DefaultCompany.NeatDiggersMobile",
-            "processId": 15923,
+            "processId": 6333,
             "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 7840,
+            "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 8981,
+            "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 10518,
+            "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 12513,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 14251,
+            "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 9745,
+            "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 11680,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 13107,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 18414,
+            "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 20493,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 21482,
+            "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 22791,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 24916,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 27361,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 27712,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 28578,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 29439,
+            "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 30463,
+            "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 31533,
+            "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 32592,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 1036,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 2993,
+            "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 4026,
+            "exited": false
         }
     ],
     "m_Tags": {
@@ -29,7 +173,7 @@
             },
             {
                 "m_Name": "No Filter",
-                "m_Selected": true
+                "m_Selected": false
             },
             {
                 "m_Name": "",
@@ -45,7 +189,7 @@
             },
             {
                 "m_Name": "Unity",
-                "m_Selected": false
+                "m_Selected": true
             },
             {
                 "m_Name": "CRASH",

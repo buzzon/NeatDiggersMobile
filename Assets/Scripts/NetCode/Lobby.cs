@@ -9,6 +9,8 @@ using NeatDiggers.GameServer.Characters;
 
 public class Lobby : MonoBehaviour
 {
+    public Button StartButton;
+
     public Button StartGameButton;
     public Button buttonPrefab;
     public Text CharacterDescriptionText;
@@ -27,6 +29,9 @@ public class Lobby : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
+        WWW magic = new WWW("magic"); // Самая ценная строчка кода <3
+        StartButton.interactable = false;
+
         StartPanel.SetActive(true);
         LobbyPanel.SetActive(false);
         SelectCharacterPanel.SetActive(true);
@@ -40,6 +45,8 @@ public class Lobby : MonoBehaviour
         try
         {
             await connection.StartAsync();
+            StartButton.interactable = true;
+            
         }
         catch (Exception ex)
         {
@@ -50,6 +57,7 @@ public class Lobby : MonoBehaviour
 
     public async void Connect()
     {
+        StartGameButton.interactable = false;
         var token = await connection.InvokeAsync<string>("GetToken", InputCode.text);
         User user = new User { Name = InputName.text, Code = InputCode.text, Token = token };
         var room = await connection.InvokeAsync<Room>("ConnectToRoom", user);
@@ -60,6 +68,7 @@ public class Lobby : MonoBehaviour
             connection.On<Room>("ChangeState", (rm) => UpdateRoom(rm, null));
             connection.On<Room, GameAction>("ChangeStateWithAction", (rm, action) => UpdateRoom(rm, action));
         }
+        StartGameButton.interactable = true;
     }
 
     public void UpdateRoom(Room room, GameAction action)
@@ -100,7 +109,7 @@ public class Lobby : MonoBehaviour
             var pos = button.GetComponent<RectTransform>().anchoredPosition;
             button.GetComponent<RectTransform>().position = new Vector3(-pos.x, -pos.y - i * 150, 0);
             var name = i;
-            button.onClick.AddListener(delegate { SelectCharacter(name); });
+            button.onClick.AddListener(() => SelectCharacter(name));
         }
     }
 

@@ -216,7 +216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &16149240
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1955,6 +1955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce10c99c1de5f748ae096cad0d793d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button1: {fileID: 1907531316}
   StartGameButton: {fileID: 977760936}
   buttonPrefab: {fileID: 1247078910782400214, guid: 632507e75091bac41a7f93de55c03690,
     type: 3}
