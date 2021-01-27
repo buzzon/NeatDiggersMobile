@@ -9,8 +9,6 @@ using NeatDiggers.GameServer.Characters;
 
 public class Lobby : MonoBehaviour
 {
-    public Button StartButton;
-
     public Button StartGameButton;
     public Button buttonPrefab;
     public Text CharacterDescriptionText;
@@ -30,7 +28,6 @@ public class Lobby : MonoBehaviour
     async void Start()
     {
         WWW magic = new WWW("magic"); // Самая ценная строчка кода <3
-        StartButton.interactable = false;
 
         StartPanel.SetActive(true);
         LobbyPanel.SetActive(false);
@@ -45,8 +42,8 @@ public class Lobby : MonoBehaviour
         try
         {
             await connection.StartAsync();
-            StartButton.interactable = true;
-            
+            StartGameButton.interactable = true;
+
         }
         catch (Exception ex)
         {
