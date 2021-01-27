@@ -18,5 +18,7 @@ namespace NeatDiggers.GameServer
         public bool FlagOnTheGround { get; set; }
         public int Round { get; set; }
         public Player Winner { get; set; }
+
+        public bool IsCanStart() => Players.Count > 1 && Players.All(p => p.IsReady);
     }
 }
