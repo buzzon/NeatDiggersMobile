@@ -13,7 +13,7 @@ namespace NeatDiggers.GameServer
         Custom
     }
 
-    public enum Cell
+    public enum Cell 
     {
         None,
         Empty,

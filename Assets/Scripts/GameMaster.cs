@@ -1,18 +1,24 @@
-﻿using System.Collections;
+﻿using NeatDiggers.GameServer;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject Pandora;
+    public GameObject Kirill;
+    public GameObject Jupiter;
+    public GameObject Sirius;
 
-    // Update is called once per frame
-    void Update()
+    public GameObject Flag;
+    public GameObject FlagTaked;
+    public GameObject[] NoneCells;
+    public GameObject[] DigCells;
+    public GameObject SpawnCell;
+
+
+    public void DrawMap(GameMap map)
     {
-        
+
     }
 }

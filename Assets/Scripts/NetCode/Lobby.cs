@@ -23,11 +23,13 @@ public class Lobby : MonoBehaviour
     public InputField InputCode;
 
     private HubConnection connection;
+    private GameMaster gameMaster;
 
     // Start is called before the first frame update
     async void Start()
     {
         WWW magic = new WWW("magic"); // Самая ценная строчка кода <3
+        gameMaster = gameObject.GetComponent<GameMaster>();
 
         StartPanel.SetActive(true);
         LobbyPanel.SetActive(false);
@@ -64,6 +66,8 @@ public class Lobby : MonoBehaviour
             ShowSelectCharacterPanel();
             connection.On<Room>("ChangeState", (rm) => UpdateRoom(rm, null));
             connection.On<Room, GameAction>("ChangeStateWithAction", (rm, action) => UpdateRoom(rm, action));
+            var map = await connection.InvokeAsync<GameMap>("GetGameMap");
+            gameMaster.DrawMap(map);
         }
         StartGameButton.interactable = true;
     }
@@ -82,7 +86,7 @@ public class Lobby : MonoBehaviour
         }
     }
 
-    private void LoadPlayersState(List<Player> players) 
+    private void LoadPlayersState(List<Player> players)
     {
         PlayersStateText.text = "";
         for (int i = 0; i < players.Count; i++)
