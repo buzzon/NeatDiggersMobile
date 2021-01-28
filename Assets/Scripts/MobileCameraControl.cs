@@ -17,6 +17,9 @@ public class MobileCameraControl : MonoBehaviour
     Camera cam;
     bool IsZooming = false;
 
+    public bool IsUpdate = true;
+    public void ToggleControl() => IsUpdate = !IsUpdate;
+
     void Start()
     {
         xAngle = 0;
@@ -28,6 +31,8 @@ public class MobileCameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsUpdate) return;
+
         if (Input.touchCount == 0)
         {
             IsZooming = false;
