@@ -27,6 +27,6 @@ namespace NeatDiggers.GameServer
         public int Height { get; set; }
         public List<Vector> SpawnPoints { get; set; }
         public Vector FlagSpawnPoint { get; set; }
-        public Cell[,] Map { get; set; }
+        public Cell[][] Map { get; set; }
     }
 }

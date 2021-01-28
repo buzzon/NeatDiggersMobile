@@ -775,6 +775,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 31.367, y: -57.434002, z: -19.802}
+--- !u!1 &732217653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 732217654}
+  m_Layer: 0
+  m_Name: Map
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &732217654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732217653}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,13 +881,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &977760934
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,22 +2183,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54dfa36dd8e6ce44afef0fbddc0f2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pandora: {fileID: 6592685302834082944, guid: 1ba0f88bbdc74884e9967655e67de2d8, type: 3}
-  Kirill: {fileID: 8176681741722307906, guid: d82de9e0509b5a245aec89d97aba8a05, type: 3}
-  Jupiter: {fileID: 3483972805777107116, guid: dcfda6a9bdd845b45b118e3b4d1833cb, type: 3}
-  Sirius: {fileID: 2274644805084296086, guid: c0edee92f4d2cbb43a4bec7908648350, type: 3}
-  Flag: {fileID: 1928032508950113252, guid: c3f7b01fd17b4014ea4d0602381c3b59, type: 3}
-  FlagTaked: {fileID: 2563690874961018635, guid: cb2df728a2edc224f9a039190321fecf,
+  Map: {fileID: 732217653}
+  Pandora: {fileID: 1053586293663899401, guid: 1ba0f88bbdc74884e9967655e67de2d8, type: 3}
+  Kirill: {fileID: 2526085947146375778, guid: d82de9e0509b5a245aec89d97aba8a05, type: 3}
+  Jupiter: {fileID: 792123043704548314, guid: dcfda6a9bdd845b45b118e3b4d1833cb, type: 3}
+  Sirius: {fileID: 1608961403121681707, guid: c0edee92f4d2cbb43a4bec7908648350, type: 3}
+  Flag: {fileID: 7824841519557306067, guid: c3f7b01fd17b4014ea4d0602381c3b59, type: 3}
+  FlagTaked: {fileID: 7955631728862353409, guid: cb2df728a2edc224f9a039190321fecf,
     type: 3}
-  NoneCells:
-  - {fileID: 7761413222397435785, guid: 1fe1db856a9283d46858ab9243d88049, type: 3}
-  - {fileID: 201730116425410871, guid: babcf7403e13b6b40991ea71226c9832, type: 3}
-  - {fileID: 9074596255132999973, guid: 896b19b867fd9834ea811678215cb035, type: 3}
-  - {fileID: 1693980892662461785, guid: 0aa7aa0222b8e3b4eac69d0c055d22a4, type: 3}
+  EmptyCells:
+  - {fileID: 524085876284210156, guid: 1fe1db856a9283d46858ab9243d88049, type: 3}
+  - {fileID: 8100083332986507932, guid: babcf7403e13b6b40991ea71226c9832, type: 3}
+  - {fileID: 8664606191044886044, guid: 896b19b867fd9834ea811678215cb035, type: 3}
+  - {fileID: 8753984131242560088, guid: 0aa7aa0222b8e3b4eac69d0c055d22a4, type: 3}
   DigCells:
-  - {fileID: 1968701357757669960, guid: c1c943fd1a063174bb8150a2d817b9fa, type: 3}
-  - {fileID: 833177353243652288, guid: c448d1176a0b9f4438f23f89d9ac69ef, type: 3}
-  SpawnCell: {fileID: 2282365214872033988, guid: 528caa4a2bbab6f428532342030b8865,
+  - {fileID: 6650482851658640627, guid: c1c943fd1a063174bb8150a2d817b9fa, type: 3}
+  - {fileID: 1646419734683036947, guid: c448d1176a0b9f4438f23f89d9ac69ef, type: 3}
+  SpawnCell: {fileID: 1789271899987911155, guid: 528caa4a2bbab6f428532342030b8865,
     type: 3}
 --- !u!1 &2120773083
 GameObject:

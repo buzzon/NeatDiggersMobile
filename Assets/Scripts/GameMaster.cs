@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
+    public GameObject Map;
+
     public GameObject Pandora;
     public GameObject Kirill;
     public GameObject Jupiter;
@@ -12,13 +14,61 @@ public class GameMaster : MonoBehaviour
 
     public GameObject Flag;
     public GameObject FlagTaked;
-    public GameObject[] NoneCells;
+    public GameObject[] EmptyCells;
     public GameObject[] DigCells;
     public GameObject SpawnCell;
 
 
     public void DrawMap(GameMap map)
     {
+        DrawFloor(map);
+        DrawSpawnPoints(map.SpawnPoints);
+        DrawFlag(map.FlagSpawnPoint);
+        Map.transform.position = new Vector3(-map.Width / 2, 0, -map.Height / 2);
+    }
 
+    public void ShowMap(bool isVisible)
+    {
+        Map.SetActive(isVisible);
+    }
+
+    private void DrawFloor(GameMap map)
+    {
+        for (int x = 0; x < map.Width; x++)
+        {
+            for (int y = 0; y < map.Height; y++)
+            {
+                GameObject cell;
+                switch (map.Map[x][y])
+                {
+                    case Cell.Empty:
+                        cell = Instantiate(EmptyCells[Random.Range(0, EmptyCells.Length)], new Vector3(x, 0, y), Quaternion.identity);
+                        cell.transform.parent = Map.transform;
+                        break;
+                    case Cell.Digging:
+                        cell = Instantiate(DigCells[Random.Range(0, DigCells.Length)], new Vector3(x, 0, y), Quaternion.identity);
+                        cell.transform.parent = Map.transform;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        
+    }
+    
+    private void DrawSpawnPoints(List<Vector> spawnPoints)
+    {
+        for (int i = 0; i < spawnPoints.Count; i++)
+        {
+            GameObject cell = Instantiate(SpawnCell, new Vector3(spawnPoints[i].X, 0, spawnPoints[i].Y), Quaternion.identity);
+            cell.transform.parent = Map.transform;
+        }
+    }
+
+    private void DrawFlag(Vector pos)
+    {
+        GameObject cell = Instantiate(Flag, new Vector3(pos.X, 1, pos.Y), Quaternion.identity);
+        cell.transform.parent = Map.transform;
     }
 }
