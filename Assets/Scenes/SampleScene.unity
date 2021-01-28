@@ -500,10 +500,10 @@ RectTransform:
   m_Father: {fileID: 16149240}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -440, y: -1780}
+  m_AnchorMin: {x: 0.202, y: 0.4662128}
+  m_AnchorMax: {x: 0.7981923, y: 0.5314043}
+  m_AnchoredPosition: {x: 0, y: 2.5}
+  m_SizeDelta: {x: -20, y: -23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &396029084
 MonoBehaviour:
@@ -922,10 +922,10 @@ RectTransform:
   m_Father: {fileID: 1432294059}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 252, y: -834.28}
-  m_SizeDelta: {x: 471.48218, y: 103.56995}
+  m_AnchorMin: {x: 0.5, y: 0.02370213}
+  m_AnchorMax: {x: 0.97965395, y: 0.09014894}
+  m_AnchoredPosition: {x: 2.5, y: -1.2800293}
+  m_SizeDelta: {x: -27.517822, y: -22.430054}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &977760936
 MonoBehaviour:
@@ -1765,10 +1765,10 @@ RectTransform:
   m_Father: {fileID: 16149240}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 160}
-  m_SizeDelta: {x: -440, y: -1780}
+  m_AnchorMin: {x: 0.202, y: 0.55300003}
+  m_AnchorMax: {x: 0.7981923, y: 0.61734045}
+  m_AnchoredPosition: {x: 0, y: 0.5}
+  m_SizeDelta: {x: -20, y: -21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1856245146
 MonoBehaviour:
@@ -1949,10 +1949,10 @@ RectTransform:
   m_Father: {fileID: 16149240}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -160}
-  m_SizeDelta: {x: -440, y: -1780}
+  m_AnchorMin: {x: 0.202, y: 0.37961707}
+  m_AnchorMax: {x: 0.7981923, y: 0.44648942}
+  m_AnchoredPosition: {x: 0, y: 3}
+  m_SizeDelta: {x: -20, y: -26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1907531316
 MonoBehaviour:
@@ -2079,6 +2079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartGameButton: {fileID: 977760936}
+  ReadyButton: {fileID: 0}
   buttonPrefab: {fileID: 1247078910782400214, guid: 632507e75091bac41a7f93de55c03690,
     type: 3}
   CharacterDescriptionText: {fileID: 988308446}
@@ -2235,10 +2236,10 @@ RectTransform:
   m_Father: {fileID: 1432294059}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.90400004}
-  m_AnchorMax: {x: 0.5, y: 0.90400004}
-  m_AnchoredPosition: {x: -259.3, y: -1593.8002}
-  m_SizeDelta: {x: 471.48218, y: 103.56995}
+  m_AnchorMin: {x: 0.017538464, y: 0.02370213}
+  m_AnchorMax: {x: 0.5, y: 0.09014894}
+  m_AnchoredPosition: {x: -8.299988, y: -0.3001709}
+  m_SizeDelta: {x: -30.517822, y: -21.430054}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2120773085
 MonoBehaviour:

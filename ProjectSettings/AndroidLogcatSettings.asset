@@ -3,8 +3,8 @@
     "m_SelectedPackage": {
         "deviceId": "95YNW20806008550",
         "name": "com.DefaultCompany.NeatDiggersMobile",
-        "processId": 4026,
-        "exited": false
+        "processId": 14715,
+        "exited": true
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
@@ -163,6 +163,12 @@
             "name": "com.DefaultCompany.NeatDiggersMobile",
             "processId": 4026,
             "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 14715,
+            "exited": true
         }
     ],
     "m_Tags": {

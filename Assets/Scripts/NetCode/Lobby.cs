@@ -10,6 +10,10 @@ using NeatDiggers.GameServer.Characters;
 public class Lobby : MonoBehaviour
 {
     public Button StartGameButton;
+    public Button ReadyButton;
+    public Button ConnectButton;
+
+
     public Button buttonPrefab;
     public Text CharacterDescriptionText;
     public Text PlayersStateText;
@@ -37,6 +41,8 @@ public class Lobby : MonoBehaviour
         LobbyPLayersPanel.SetActive(false);
 
         StartGameButton.interactable = false;
+        ReadyButton.interactable = false;
+        ConnectButton.interactable = false;
 
         connection = new HubConnectionBuilder()
             .WithUrl("https://neat-diggers.fun/GameHub")
@@ -44,7 +50,7 @@ public class Lobby : MonoBehaviour
         try
         {
             await connection.StartAsync();
-            StartGameButton.interactable = true;
+            ConnectButton.interactable = true;
 
         }
         catch (Exception ex)
@@ -56,7 +62,7 @@ public class Lobby : MonoBehaviour
 
     public async void Connect()
     {
-        StartGameButton.interactable = false;
+        ConnectButton.interactable = false;
         var token = await connection.InvokeAsync<string>("GetToken", InputCode.text);
         User user = new User { Name = InputName.text, Code = InputCode.text, Token = token };
         var room = await connection.InvokeAsync<Room>("ConnectToRoom", user);
@@ -69,7 +75,7 @@ public class Lobby : MonoBehaviour
             var map = await connection.InvokeAsync<GameMap>("GetGameMap");
             gameMaster.DrawMap(map);
         }
-        StartGameButton.interactable = true;
+        ConnectButton.interactable = true;
     }
 
     public void UpdateRoom(Room room, GameAction action)
@@ -116,6 +122,7 @@ public class Lobby : MonoBehaviour
 
     public async void SelectCharacter(int name)
     {
+        ReadyButton.interactable = true;
         var character = await connection.InvokeAsync<Character>("ChangeCharacter", name);
         CharacterDescriptionText.text =
             $"{character.Title}\n" +
@@ -132,6 +139,7 @@ public class Lobby : MonoBehaviour
 
         LobbyPLayersPanel.SetActive(SelectCharacterPanel.activeSelf);
         SelectCharacterPanel.SetActive(!SelectCharacterPanel.activeSelf);
+        ReadyButton.GetComponentInChildren<Text>().text = SelectCharacterPanel.activeSelf ? "Готов" : "Не готов";
     }
 
     public async void StartGame()
