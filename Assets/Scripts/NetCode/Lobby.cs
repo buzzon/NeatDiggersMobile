@@ -13,7 +13,6 @@ public class Lobby : MonoBehaviour
     public Button ReadyButton;
     public Button ConnectButton;
 
-
     public Button buttonPrefab;
     public Text CharacterDescriptionText;
     public Text PlayersStateText;
@@ -22,23 +21,27 @@ public class Lobby : MonoBehaviour
     public GameObject LobbyPanel;
     public GameObject SelectCharacterPanel;
     public GameObject LobbyPLayersPanel;
+    public GameObject InterfacePanel;
 
     public InputField InputName;
     public InputField InputCode;
 
     private HubConnection connection;
     private GameMaster gameMaster;
+    private User user = null;
 
     // Start is called before the first frame update
     async void Start()
     {
         WWW magic = new WWW("magic"); // Самая ценная строчка кода <3
         gameMaster = gameObject.GetComponent<GameMaster>();
+        gameMaster.ShowMap(false);
 
         StartPanel.SetActive(true);
         LobbyPanel.SetActive(false);
         SelectCharacterPanel.SetActive(true);
         LobbyPLayersPanel.SetActive(false);
+        InterfacePanel.SetActive(false);
 
         StartGameButton.interactable = false;
         ReadyButton.interactable = false;
@@ -59,12 +62,15 @@ public class Lobby : MonoBehaviour
             StartPanel.SetActive(false);
         }
     }
-
+  
     public async void Connect()
     {
         ConnectButton.interactable = false;
-        var token = await connection.InvokeAsync<string>("GetToken", InputCode.text);
-        User user = new User { Name = InputName.text, Code = InputCode.text, Token = token };
+        if (user == null)
+        {
+            user = await connection.InvokeAsync<User>("Connect", InputCode.text);
+            user.Name = InputName.text;
+        }
         var room = await connection.InvokeAsync<Room>("ConnectToRoom", user);
 
         if (room != null)
@@ -73,7 +79,9 @@ public class Lobby : MonoBehaviour
             connection.On<Room>("ChangeState", (rm) => UpdateRoom(rm, null));
             connection.On<Room, GameAction>("ChangeStateWithAction", (rm, action) => UpdateRoom(rm, action));
             var map = await connection.InvokeAsync<GameMap>("GetGameMap");
+            gameMaster.user = user;
             gameMaster.DrawMap(map);
+            gameMaster.UpdateRoom(room, null);
         }
         ConnectButton.interactable = true;
     }
@@ -84,6 +92,11 @@ public class Lobby : MonoBehaviour
         {
             StartPanel.SetActive(false);
             LobbyPanel.SetActive(false);
+            InterfacePanel.SetActive(true);
+            gameMaster.ShowMap(true);
+            gameMaster.UpdateRoom(room, action);
+
+            //win user = null
         }
         else
         {
