@@ -9,6 +9,8 @@ using NeatDiggers.GameServer.Characters;
 
 public class Lobby : MonoBehaviour
 {
+    public GameControls gameControls;
+
     public Button StartGameButton;
     public Button ReadyButton;
     public Button ConnectButton;
@@ -26,62 +28,37 @@ public class Lobby : MonoBehaviour
     public InputField InputName;
     public InputField InputCode;
 
-    private HubConnection connection;
-    private GameMaster gameMaster;
-    private User user = null;
-
     // Start is called before the first frame update
-    async void Start()
+    void Start()
     {
         WWW magic = new WWW("magic"); // Самая ценная строчка кода <3
-        gameMaster = gameObject.GetComponent<GameMaster>();
-        gameMaster.ShowMap(false);
+        GameHub.OnConected += OnConected;
 
-        StartPanel.SetActive(true);
         LobbyPanel.SetActive(false);
-        SelectCharacterPanel.SetActive(true);
         LobbyPLayersPanel.SetActive(false);
         InterfacePanel.SetActive(false);
-
         StartGameButton.interactable = false;
         ReadyButton.interactable = false;
         ConnectButton.interactable = false;
-
-        connection = new HubConnectionBuilder()
-            .WithUrl("https://neat-diggers.fun/GameHub")
-            .Build();
-        try
-        {
-            await connection.StartAsync();
-            ConnectButton.interactable = true;
-
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError(ex.Message);
-            StartPanel.SetActive(false);
-        }
     }
-  
-    public async void Connect()
+
+    void OnConected()
+    {
+        StartPanel.SetActive(true);
+        SelectCharacterPanel.SetActive(true);
+    }
+
+    public async void ConnectToRoom()
     {
         ConnectButton.interactable = false;
-        if (user == null)
-        {
-            user = await connection.InvokeAsync<User>("Connect", InputCode.text);
-            user.Name = InputName.text;
-        }
-        var room = await connection.InvokeAsync<Room>("ConnectToRoom", user);
+
+        var room = await GameHub.ConnectToRoom(InputName.text, InputCode.text);
 
         if (room != null)
         {
+            GameHub.InitRoom(room);
+            GameHub.OnUpdateRoom += UpdateRoom;
             ShowSelectCharacterPanel();
-            connection.On<Room>("ChangeState", (rm) => UpdateRoom(rm, null));
-            connection.On<Room, GameAction>("ChangeStateWithAction", (rm, action) => UpdateRoom(rm, action));
-            var map = await connection.InvokeAsync<GameMap>("GetGameMap");
-            gameMaster.user = user;
-            gameMaster.DrawMap(map);
-            gameMaster.UpdateRoom(room, null);
         }
         ConnectButton.interactable = true;
     }
@@ -93,9 +70,13 @@ public class Lobby : MonoBehaviour
             StartPanel.SetActive(false);
             LobbyPanel.SetActive(false);
             InterfacePanel.SetActive(true);
-            gameMaster.ShowMap(true);
-            gameMaster.UpdateRoom(room, action);
 
+            bool isMyTurn = room.Players[room.PlayerTurn].Id == GameHub.User.Id;
+            gameControls.ShowInterface(isMyTurn);
+            if (isMyTurn)
+            {
+                gameControls.Player = (room.Players[room.PlayerTurn]);
+            }
             //win user = null
         }
         else
@@ -128,15 +109,15 @@ public class Lobby : MonoBehaviour
             button.GetComponentInChildren<Text>().text = characters[i];
             var pos = button.GetComponent<RectTransform>().anchoredPosition;
             button.GetComponent<RectTransform>().position = new Vector3(-pos.x, -pos.y - i * 150, 0);
-            var name = i;
+            CharacterName name = (CharacterName)i;
             button.onClick.AddListener(() => SelectCharacter(name));
         }
     }
 
-    public async void SelectCharacter(int name)
+    public async void SelectCharacter(CharacterName name)
     {
         ReadyButton.interactable = true;
-        var character = await connection.InvokeAsync<Character>("ChangeCharacter", name);
+        var character = await GameHub.ChangeCharacter(name);
         CharacterDescriptionText.text =
             $"{character.Title}\n" +
             $"Здоровье: {character.MaxHealth}\n" +
@@ -148,15 +129,12 @@ public class Lobby : MonoBehaviour
 
     public async void ChangeReady()
     {
-        await connection.InvokeAsync("ChangeReady");
+        await GameHub.ChangeReady();
 
         LobbyPLayersPanel.SetActive(SelectCharacterPanel.activeSelf);
         SelectCharacterPanel.SetActive(!SelectCharacterPanel.activeSelf);
         ReadyButton.GetComponentInChildren<Text>().text = SelectCharacterPanel.activeSelf ? "Готов" : "Не готов";
     }
 
-    public async void StartGame()
-    {
-        await connection.InvokeAsync("StartGame");
-    }
+    public async void StartGame() => await GameHub.StartGame();
 }

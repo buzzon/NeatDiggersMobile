@@ -6,6 +6,15 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
+
+    private void Start()
+    {
+        ShowMap(false);
+        GameHub.OnInitRoom += InitMap;
+        GameHub.OnUpdateRoom += UpdateRoom;
+    }
+
+    public GameObject CameraTarget;
     public GameObject Map;
 
     public GameObject Flag;
@@ -14,17 +23,20 @@ public class GameMaster : MonoBehaviour
     public GameObject[] DigCells;
     public GameObject SpawnCell;
 
-    public User user;
-
     public GameObject PlayersParent;
 
+    private async void InitMap(Room room)
+    {
+        GameMap map = await GameHub.GetGameMap();
+        DrawMap(map);
+    }
 
     public void DrawMap(GameMap map)
     {
         DrawFloor(map);
         DrawSpawnPoints(map.SpawnPoints);
         DrawFlag(map.FlagSpawnPoint);
-        //Map.transform.position = new Vector3(-map.Width / 2, 0, -map.Height / 2);
+        CameraTarget.transform.position = new Vector3(map.Width / 2, 0, map.Height / 2);
     }
 
     public void UpdateRoom(Room room, GameAction action)
