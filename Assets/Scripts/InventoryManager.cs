@@ -21,6 +21,10 @@ public class InventoryManager : MonoBehaviour
     public GameObject Items;
     public Button ItemsButton;
 
+    public Text LeftWeapon;
+    public Text RightWeapon;
+    public Text Armor;
+
 
     void Start()
     {
@@ -83,5 +87,9 @@ public class InventoryManager : MonoBehaviour
             itemsButtons[i].GetComponent<ItemHandler>().Item = player.Inventory.Items[i];
             itemsButtons[i].GetComponent<ItemHandler>().Inventory = player.Inventory;
         }
+
+        LeftWeapon.text = $"Левая рука: {player.Inventory.LeftWeapon.Title}";
+        RightWeapon.text = $"Правая рука: {player.Inventory.RightWeapon.Title}";
+        Armor.text = $"Броня: {player.Inventory.Armor.Title}";
     }
 }

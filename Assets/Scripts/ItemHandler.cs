@@ -39,17 +39,17 @@ public class ItemHandler : MonoBehaviour
 
     private async void Euquip(DescriptionPanelHandler dph)
     {
-        //Item armorBackUp = Inventory.Armor;
-        //if (Inventory.Armor.Name != ItemName.Empty)
-        //    Inventory.Items.Add(Inventory.Armor);
-        //Inventory.Armor = Item;
-        //Inventory.Items.Remove(Item);
+        Item armorBackUp = Inventory.Armor;
+        if (Inventory.Armor.Name != ItemName.Empty)
+            Inventory.Items.Add(Inventory.Armor);
+        Inventory.Armor = Item;
+        Inventory.Items.Remove(Item);
         bool success = await GameHub.ChangeInventory(Inventory);
         if (!success)
         {
-            //Inventory.Armor = armorBackUp;
-            //Inventory.Items.Remove(armorBackUp);
-            //Inventory.Items.Add(Item);
+            Inventory.Armor = armorBackUp;
+            Inventory.Items.Remove(armorBackUp);
+            Inventory.Items.Add(Item);
         }
         dph.Cancel();
     }

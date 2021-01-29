@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "95YNW20806008550",
         "name": "com.DefaultCompany.NeatDiggersMobile",
-        "processId": 18034,
+        "processId": 17299,
         "exited": true
     },
     "m_SelectedPriority": 0,
@@ -174,6 +174,18 @@
             "deviceId": "95YNW20806008550",
             "name": "com.DefaultCompany.NeatDiggersMobile",
             "processId": 18034,
+            "exited": true
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 14790,
+            "exited": false
+        },
+        {
+            "deviceId": "95YNW20806008550",
+            "name": "com.DefaultCompany.NeatDiggersMobile",
+            "processId": 17299,
             "exited": true
         }
     ],
