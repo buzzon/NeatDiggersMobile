@@ -79,8 +79,8 @@ public class InventoryManager : MonoBehaviour
 
         while (itemsButtons.Count < player.Inventory.Items.Count)
             itemsButtons.Add(Instantiate(ItemsButton, Items.transform));
-        while (itemsButtons.Count > player.Inventory.Items.Count)
-            Destroy(itemsButtons[0]);
+        //while (itemsButtons.Count > player.Inventory.Items.Count)
+        //    Destroy(itemsButtons[0]);
         for (int i = 0; i < player.Inventory.Items.Count; i++)
         {
             itemsButtons[i].GetComponentInChildren<Text>().text = $"{player.Inventory.Items[i].Title}";
