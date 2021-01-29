@@ -29,21 +29,30 @@ public static class GameHub
         Connect();
     }
 
+    public static async Task<int> RollTheDice()
+    {
+        return await connection.InvokeAsync<int>("RollTheDice");
+    }
+
+    public static void EndTurn()
+    {
+        connection.InvokeAsync("EndTurn");
+    }
+
     private static async void Connect()
     {
-        bool isConected = false;
-
-        while (!isConected)
+        for (int i = 0; i < 3; i++)
         {
             try
             {
                 await connection.StartAsync();
                 OnConected?.Invoke();
-                isConected = true;
+                break;
             }
             catch (Exception ex)
             {
                 Debug.LogError(ex.Message);
+                await Task.Delay(2000);
             }
         }
     }

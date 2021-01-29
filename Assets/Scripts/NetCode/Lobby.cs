@@ -9,8 +9,6 @@ using NeatDiggers.GameServer.Characters;
 
 public class Lobby : MonoBehaviour
 {
-    public GameControls gameControls;
-
     public Button StartGameButton;
     public Button ReadyButton;
     public Button ConnectButton;
@@ -46,6 +44,7 @@ public class Lobby : MonoBehaviour
     {
         StartPanel.SetActive(true);
         SelectCharacterPanel.SetActive(true);
+        ConnectButton.interactable = true;
     }
 
     public async void ConnectToRoom()
@@ -70,14 +69,7 @@ public class Lobby : MonoBehaviour
             StartPanel.SetActive(false);
             LobbyPanel.SetActive(false);
             InterfacePanel.SetActive(true);
-
-            bool isMyTurn = room.Players[room.PlayerTurn].Id == GameHub.User.Id;
-            gameControls.ShowInterface(isMyTurn);
-            if (isMyTurn)
-            {
-                gameControls.Player = (room.Players[room.PlayerTurn]);
-            }
-            //win user = null
+            GameHub.OnUpdateRoom -= UpdateRoom;
         }
         else
         {

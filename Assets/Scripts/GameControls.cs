@@ -21,22 +21,26 @@ public class GameControls : MonoBehaviour
 
     private int diceValue;
     public Player Player { get; set; }
-    public HubConnection Connection { get; set; }
+
+    private void Start()
+    {
+        GameHub.OnUpdateRoom += UpdateRoom;
+        GameHub.OnInitRoom += (room) => UpdateRoom(room, null);
+    }
+
+    private void UpdateRoom(Room room, GameAction action)
+    {
+        Interface.SetActive(room.Players[room.PlayerTurn].Id == GameHub.User.Id);
+    }
 
     public void EndTurn()
     {
-        Connection.InvokeAsync("EndTurn");
-        Interface.SetActive(false);
-    }
-
-    public void ShowInterface(bool show) 
-    {
-        Interface.SetActive(show);
+        GameHub.EndTurn();
     }
 
     public async void RollDice()
     {
-        diceValue = await Connection.InvokeAsync<int>("RollTheDice");
+        diceValue = await GameHub.RollTheDice();
         DiceCount.text = diceValue.ToString();
         await Task.Delay(3000);
         DiceCount.text = "";

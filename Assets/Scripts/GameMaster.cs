@@ -29,6 +29,7 @@ public class GameMaster : MonoBehaviour
     {
         GameMap map = await GameHub.GetGameMap();
         DrawMap(map);
+        ShowMap(true);
     }
 
     public void DrawMap(GameMap map)
@@ -41,7 +42,9 @@ public class GameMaster : MonoBehaviour
 
     public void UpdateRoom(Room room, GameAction action)
     {
-        UpdatePlayers(room.Players);
+        if (room.IsStarted)
+            UpdatePlayers(room.Players);
+        
     }
 
     public void ShowMap(bool isVisible)
@@ -67,16 +70,6 @@ public class GameMaster : MonoBehaviour
             if (!isUpdatedPlayer)
                 PlayersParent.GetComponent<PlayersManager>().CreatePlayer(player);
         }
-    }
-
-    private void AddPlayerToScene(Player player)
-    {
-
-    }
-
-    private void UpdatePlayerInfo(Player player, Player newState)
-    {
-
     }
 
     private void DrawFloor(GameMap map)

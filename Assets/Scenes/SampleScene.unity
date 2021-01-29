@@ -2195,14 +2195,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aad82ccfcc18ab41bfc0a20aac3209b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggleRotation: {fileID: 0}
+  toggleRotation: {fileID: 1073105228}
   DiceCount: {fileID: 96558280}
   ButtonDig: {fileID: 1823228793}
   ButtonRolDice: {fileID: 814898228}
   ButtonTakeFlag: {fileID: 690000933}
   ButtonMove: {fileID: 1262597696}
   ButtonEndTurn: {fileID: 670028590}
-  Interface: {fileID: 1765968226}
+  Interface: {fileID: 508302040}
 --- !u!1 &514116456
 GameObject:
   m_ObjectHideFlags: 0
@@ -7473,7 +7473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1765968227
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8475,7 +8475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1898272726
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8743,7 +8743,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce10c99c1de5f748ae096cad0d793d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameControls: {fileID: 0}
   StartGameButton: {fileID: 977760936}
   ReadyButton: {fileID: 2120773085}
   ConnectButton: {fileID: 1907531316}
