@@ -58,6 +58,12 @@ public class GameControls : MonoBehaviour
         await GameHub.DoAction(action);
     }
 
+    public async void TakeFlag()
+    {
+        GameAction action = new GameAction { Type = GameActionType.TakeTheFlag };
+        await GameHub.DoAction(action);
+    }
+
     public void MoveBegin()
     {
         MoveBasic.SetActive(false);
