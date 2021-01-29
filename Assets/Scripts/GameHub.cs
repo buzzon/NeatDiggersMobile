@@ -62,6 +62,11 @@ public static class GameHub
         return await connection.InvokeAsync<bool>("DoAction", action);
     }
 
+    public static async Task<bool> ChangeInventory(Inventory inventory)
+    {
+        return await connection.InvokeAsync<bool>("ChangeInventory", inventory);
+    }
+
     public static async Task<User> Connect(string code)
     {
         return await connection.InvokeAsync<User>("Connect", code);

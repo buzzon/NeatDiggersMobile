@@ -55,7 +55,12 @@ public class InventoryManager : MonoBehaviour
         }
         else
             for (int i = 0; i < abilitiesButtons.Count; i++)
-                abilitiesButtons[i].interactable = player.Character.Abilities[i].IsActive;
+            {
+                abilitiesButtons[i].interactable = player.Character.Abilities[i].IsActive && 
+                    player.Character.Abilities[i].Type != NeatDiggers.GameServer.Abilities.AbilityType.Passive;
+                abilitiesButtons[i].GetComponent<AbilityHandler>().Ability = player.Character.Abilities[i];
+            }
+                
 
         while (effectsTexts.Count < player.Effects.Count)
             effectsTexts.Add(Instantiate(EffectsText, Effects.transform));
@@ -73,6 +78,10 @@ public class InventoryManager : MonoBehaviour
         while (itemsButtons.Count > player.Inventory.Items.Count)
             Destroy(itemsButtons[0]);
         for (int i = 0; i < player.Inventory.Items.Count; i++)
+        {
             itemsButtons[i].GetComponentInChildren<Text>().text = $"{player.Inventory.Items[i].Title}";
+            itemsButtons[i].GetComponent<ItemHandler>().Item = player.Inventory.Items[i];
+            itemsButtons[i].GetComponent<ItemHandler>().Inventory = player.Inventory;
+        }
     }
 }
