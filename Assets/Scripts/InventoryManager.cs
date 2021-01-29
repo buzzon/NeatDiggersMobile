@@ -1,6 +1,7 @@
 ﻿using NeatDiggers.GameServer;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -76,16 +77,15 @@ public class InventoryManager : MonoBehaviour
             effectsTexts[i].text = player.Effects[i].Title + dur;
         }
 
-
-        while (itemsButtons.Count < player.Inventory.Items.Count)
-            itemsButtons.Add(Instantiate(ItemsButton, Items.transform));
-        //while (itemsButtons.Count > player.Inventory.Items.Count)
-        //    Destroy(itemsButtons[0]);
         for (int i = 0; i < player.Inventory.Items.Count; i++)
         {
-            itemsButtons[i].GetComponentInChildren<Text>().text = $"{player.Inventory.Items[i].Title}";
-            itemsButtons[i].GetComponent<ItemHandler>().Item = player.Inventory.Items[i];
-            itemsButtons[i].GetComponent<ItemHandler>().Inventory = player.Inventory;
+            if (!itemsButtons.Any(Button => Button.GetComponent<ItemHandler>().Item.Name == player.Inventory.Items[i].Name))
+            {
+                itemsButtons.Add(Instantiate(ItemsButton, Items.transform));
+                itemsButtons.Last().GetComponentInChildren<Text>().text = $"{player.Inventory.Items[i].Title}";
+                itemsButtons.Last().GetComponent<ItemHandler>().Item = player.Inventory.Items[i];
+                itemsButtons.Last().GetComponent<ItemHandler>().Inventory = player.Inventory;
+            }
         }
 
         LeftWeapon.text = $"Левая рука: {player.Inventory.LeftWeapon.Title}";

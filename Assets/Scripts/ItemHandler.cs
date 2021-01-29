@@ -52,5 +52,6 @@ public class ItemHandler : MonoBehaviour
             Inventory.Items.Add(Item);
         }
         dph.Cancel();
+        Destroy(transform.gameObject);
     }
 }
