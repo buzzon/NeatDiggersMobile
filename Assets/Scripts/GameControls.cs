@@ -60,7 +60,7 @@ public class GameControls : MonoBehaviour
 
     public async void TakeFlag()
     {
-        GameAction action = new GameAction { Type = GameActionType.TakeTheFlag };
+        GameAction action = new GameAction { Type = GameActionType.TakeTheFlag, TargetPosition = new Vector() };
         await GameHub.DoAction(action);
     }
 
