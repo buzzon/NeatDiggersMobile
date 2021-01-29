@@ -50,7 +50,7 @@ public class MobileCameraControl : MonoBehaviour
                 SecondPoint = Input.GetTouch(0).position;
                 xAngle = xAngleTemp + (SecondPoint.x - FirstPoint.x) * 180 / Screen.width;
                 yAngle = yAngleTemp - (SecondPoint.y - FirstPoint.y) * 90 / Screen.height;
-                this.transform.rotation = Quaternion.Euler(yAngle, xAngle, 0.0f);
+                transform.rotation = Quaternion.Euler(yAngle, xAngle, 0.0f);
             }
         }
         if (Input.touchCount == 2)

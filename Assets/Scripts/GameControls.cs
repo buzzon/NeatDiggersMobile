@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class GameControls : MonoBehaviour
 {
+    public GameObject target;
+
     public Toggle toggleRotation;
 
     public Text DiceCount;
@@ -18,6 +20,9 @@ public class GameControls : MonoBehaviour
     public Button ButtonMove;
     public Button ButtonEndTurn;
     public GameObject Interface;
+
+    public GameObject MoveBasic;
+    public GameObject MoveButtons;
 
     private int diceValue;
     public Player Player { get; set; }
@@ -31,6 +36,7 @@ public class GameControls : MonoBehaviour
     private void UpdateRoom(Room room, GameAction action)
     {
         Interface.SetActive(room.Players[room.PlayerTurn].Id == GameHub.User.Id);
+        Player = room.Players.Find(p => p.Id == GameHub.User.Id);
     }
 
     public void EndTurn()
@@ -52,10 +58,30 @@ public class GameControls : MonoBehaviour
         await GameHub.DoAction(action);
     }
 
-    public void Move()
+    public void MoveBegin()
     {
+        MoveBasic.SetActive(false);
+        MoveButtons.SetActive(true);
+
         toggleRotation.isOn = false;
-        //on touch move show target
-        //on touch end show hint move
+        target.GetComponent<TargetControl>().StartListen(SetTargetPosition);
+        target.SetActive(true);
+    }
+
+    private Vector targetPosition;
+    private void SetTargetPosition(Vector pos) => targetPosition = pos;
+
+
+    public async void MoveEnd(bool cancel)
+    {
+        MoveBasic.SetActive(true);
+        MoveButtons.SetActive(false);
+        toggleRotation.isOn = true;
+
+        target.SetActive(false);
+        target.GetComponent<TargetControl>().StopListen();
+        if (cancel) return;
+        GameAction action = new GameAction { Type = GameActionType.Move, TargetPosition = targetPosition };
+        await GameHub.DoAction(action);
     }
 }

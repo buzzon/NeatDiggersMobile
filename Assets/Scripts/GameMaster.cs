@@ -44,7 +44,6 @@ public class GameMaster : MonoBehaviour
     {
         if (room.IsStarted)
             UpdatePlayers(room.Players);
-        
     }
 
     public void ShowMap(bool isVisible)
@@ -106,7 +105,7 @@ public class GameMaster : MonoBehaviour
 
     private void DrawFlag(Vector pos)
     {
-        GameObject cell = Instantiate(Flag, new Vector3(pos.X, 1, pos.Y), Quaternion.identity);
-        cell.transform.parent = Map.transform;
+        GameObject flag = Instantiate(Flag, new Vector3(pos.X, 1, pos.Y), Quaternion.identity);
+        flag.transform.parent = Map.transform;
     }
 }
