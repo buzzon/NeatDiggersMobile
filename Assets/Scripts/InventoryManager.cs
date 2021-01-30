@@ -61,11 +61,11 @@ public class InventoryManager : MonoBehaviour
         else
             for (int i = 0; i < abilitiesButtons.Count; i++)
             {
-                abilitiesButtons[i].interactable = player.Character.Abilities[i].IsActive && 
+                abilitiesButtons[i].interactable = player.Character.Abilities[i].IsActive &&
                     player.Character.Abilities[i].Type != NeatDiggers.GameServer.Abilities.AbilityType.Passive;
                 abilitiesButtons[i].GetComponent<AbilityHandler>().Ability = player.Character.Abilities[i];
             }
-                
+
 
         while (effectsTexts.Count < player.Effects.Count)
             effectsTexts.Add(Instantiate(EffectsText, Effects.transform));
@@ -77,16 +77,57 @@ public class InventoryManager : MonoBehaviour
             effectsTexts[i].text = player.Effects[i].Title + dur;
         }
 
-        for (int i = 0; i < player.Inventory.Items.Count; i++)
+
+        for (int i = 0; i < itemsButtons.Count; i++)
         {
-            if (!itemsButtons.Any(Button => Button.GetComponent<ItemHandler>().Item.Name == player.Inventory.Items[i].Name))
+            if (itemsButtons[i] == null)
+                itemsButtons.RemoveAt(i--);
+            else
+                itemsButtons[i].GetComponent<ItemHandler>().Inventory = player.Inventory;
+        }
+
+        for (int k = 0, j = 0; k < player.Inventory.Items.Count; k++, j++)
+        {
+            ItemHandler itemHandler = null;
+            if (itemsButtons.Count > j)
+            {
+                itemHandler = itemsButtons[j].GetComponent<ItemHandler>();
+            }
+            if (itemHandler == null)
             {
                 itemsButtons.Add(Instantiate(ItemsButton, Items.transform));
-                itemsButtons.Last().GetComponentInChildren<Text>().text = $"{player.Inventory.Items[i].Title}";
-                itemsButtons.Last().GetComponent<ItemHandler>().Item = player.Inventory.Items[i];
+                itemsButtons.Last().GetComponentInChildren<Text>().text = $"{player.Inventory.Items[k].Title}";
+                itemsButtons.Last().GetComponent<ItemHandler>().Item = player.Inventory.Items[k];
+                itemsButtons.Last().GetComponent<ItemHandler>().Inventory = player.Inventory;
+            }
+            else if (!itemHandler.IsAlive)
+            {
+                k--;
+            }
+            else if (itemHandler.Item.Name != player.Inventory.Items[k].Name)
+            {
+                //Destroy(itemsButtons[j].transform.gameObject);
+                //itemsButtons.RemoveAt(j--);
+                j--;
+                itemsButtons.Add(Instantiate(ItemsButton, Items.transform));
+                itemsButtons.Last().GetComponentInChildren<Text>().text = $"{player.Inventory.Items[k].Title}";
+                itemsButtons.Last().GetComponent<ItemHandler>().Item = player.Inventory.Items[k];
                 itemsButtons.Last().GetComponent<ItemHandler>().Inventory = player.Inventory;
             }
         }
+
+        //for (int i = 0; i < player.Inventory.Items.Count; i++)
+        //{
+
+
+        //    if (!itemsButtons.Any(Button => Button.GetComponent<ItemHandler>().Item.Name == player.Inventory.Items[i].Name))
+        //    {
+        //        itemsButtons.Add(Instantiate(ItemsButton, Items.transform));
+        //        itemsButtons.Last().GetComponentInChildren<Text>().text = $"{player.Inventory.Items[i].Title}";
+        //        itemsButtons.Last().GetComponent<ItemHandler>().Item = player.Inventory.Items[i];
+        //        itemsButtons.Last().GetComponent<ItemHandler>().Inventory = player.Inventory;
+        //    }
+        //}
 
         LeftWeapon.text = $"Левая рука: {player.Inventory.LeftWeapon.Title}";
         RightWeapon.text = $"Правая рука: {player.Inventory.RightWeapon.Title}";

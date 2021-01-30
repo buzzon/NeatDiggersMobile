@@ -11,6 +11,8 @@ public class ItemHandler : MonoBehaviour
     public GameObject DescriptionPanel;
     public Item Item { get; set; }
 
+    public bool IsAlive { get; set; } = true;
+
     public Inventory Inventory { get; set; }
 
     public void OnClick()
@@ -39,19 +41,23 @@ public class ItemHandler : MonoBehaviour
 
     private async void Euquip(DescriptionPanelHandler dph)
     {
+        IsAlive = false;
         Item armorBackUp = Inventory.Armor;
         if (Inventory.Armor.Name != ItemName.Empty)
             Inventory.Items.Add(Inventory.Armor);
         Inventory.Armor = Item;
-        Inventory.Items.Remove(Item);
+        Item it = Inventory.Items.Find(i => i.Name == Item.Name);
+        Inventory.Items.Remove(it);
         bool success = await GameHub.ChangeInventory(Inventory);
+        dph.Cancel();
         if (!success)
         {
+            IsAlive = true;
             Inventory.Armor = armorBackUp;
             Inventory.Items.Remove(armorBackUp);
             Inventory.Items.Add(Item);
         }
-        dph.Cancel();
-        Destroy(transform.gameObject);
+        else
+            Destroy(transform.gameObject);
     }
 }
