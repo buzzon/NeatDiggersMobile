@@ -34,28 +34,24 @@ public class DescriptionPanelHandler : MonoBehaviour
     public void Use()
     {
         UseAction?.Invoke();
-        Cancel();
     }
 
     public Action UseLeftAction;
     public void UseLeft()
     {
         UseLeftAction?.Invoke();
-        Cancel();
     }
 
     public Action UseRightAction;
     public void UseRight()
     {
         UseRightAction?.Invoke();
-        Cancel();
     }
 
     public Action UseTwoAction;
     public void UseTwo()
     {
         UseTwoAction?.Invoke();
-        Cancel();
     }
 
     public Action EquipAction;
