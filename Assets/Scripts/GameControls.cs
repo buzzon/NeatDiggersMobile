@@ -8,7 +8,8 @@ using UnityEngine.UI;
 
 public class GameControls : MonoBehaviour
 {
-    public GameObject target;
+    public GameObject TargetPrefab;
+    private GameObject target;
 
     public Toggle toggleRotation;
 
@@ -70,8 +71,8 @@ public class GameControls : MonoBehaviour
         MoveButtons.SetActive(true);
 
         toggleRotation.isOn = false;
+        target = Instantiate(TargetPrefab);
         target.GetComponent<TargetControl>().StartListen(SetTargetPosition);
-        target.SetActive(true);
     }
 
     private Vector targetPosition;
@@ -84,8 +85,7 @@ public class GameControls : MonoBehaviour
         MoveButtons.SetActive(false);
         toggleRotation.isOn = true;
 
-        target.SetActive(false);
-        target.GetComponent<TargetControl>().StopListen();
+        Destroy(target);
         if (cancel) return;
         GameAction action = new GameAction { Type = GameActionType.Move, TargetPosition = targetPosition };
         await GameHub.DoAction(action);

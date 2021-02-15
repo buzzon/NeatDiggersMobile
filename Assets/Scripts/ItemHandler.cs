@@ -5,10 +5,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemHandler : MonoBehaviour
 {
     public GameObject DescriptionPanel;
+    public GameObject UseItemButtons;
+    public GameObject TargetPrefab;
+    private GameObject target;
     public Item Item { get; set; }
 
     public bool IsAlive { get; set; } = true;
@@ -26,6 +30,7 @@ public class ItemHandler : MonoBehaviour
         switch (Item.Type)
         {
             case ItemType.Active:
+                dph.UseAction = () => Use(dph);
                 break;
             case ItemType.Weapon:
                 switch (Item.WeaponHanded)
@@ -49,6 +54,52 @@ public class ItemHandler : MonoBehaviour
         }
 
         dph.DrawButtons();
+    }
+
+    private async void Use(DescriptionPanelHandler dph)
+    {
+        IsAlive = false;
+        switch (Item.Target)
+        {
+            case Target.None:
+                GameAction action = new GameAction() { Type = GameActionType.UseItem,  Item = Item };
+                bool success = await GameHub.DoAction(action);
+                dph.Cancel();
+                if (success)
+                    Destroy(transform.gameObject);
+                break;
+            case Target.Player:
+                break;
+            case Target.Position:
+                target = Instantiate(TargetPrefab);
+                target.GetComponent<TargetControl>().StartListen(SetTargetPosition);
+                dph.Cancel();
+                GameObject.Find("PanelInventory").SetActive(false);
+                GameObject useItemButtons = Instantiate(UseItemButtons);
+                Transform use = useItemButtons.transform.Find("ButtonUseEnd");
+                use.gameObject.GetComponent<Button>().onClick.AddListener(() => UseOnPositionEnd(false, useItemButtons));
+                Transform cancel = useItemButtons.transform.Find("ButtonMoveCancel");
+                cancel.gameObject.GetComponent<Button>().onClick.AddListener(() => UseOnPositionEnd(true, useItemButtons));
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    private Vector targetPosition;
+    private void SetTargetPosition(Vector pos) => targetPosition = pos;
+
+    public async void UseOnPositionEnd(bool cancel, GameObject useItemButtons)
+    {
+        Destroy(useItemButtons);
+        Destroy(target);
+        GameObject.Find("PanelInventory").SetActive(true);
+        if (cancel) return;
+        GameAction action = new GameAction() { Type = GameActionType.UseItem, Item = Item, TargetPosition = targetPosition };
+        bool success = await GameHub.DoAction(action);
+        if (success)
+            Destroy(transform.gameObject);
     }
 
     private async void Euquip(DescriptionPanelHandler dph)
@@ -104,7 +155,7 @@ public class ItemHandler : MonoBehaviour
         {
             Inventory.Items.Add(Inventory.LeftWeapon);
             Inventory.LeftWeapon = new Item { Name = ItemName.Empty };
-        }   
+        }
 
         if (Inventory.RightWeapon.Name != ItemName.Empty)
             Inventory.Items.Add(Inventory.RightWeapon);

@@ -9,7 +9,6 @@ public class TargetControl : MonoBehaviour
     private Action<Vector> callback;
 
     public void StartListen(Action<Vector> callback) => this.callback = callback;
-    public void StopListen() => callback = null;
 
     void Update()
     {

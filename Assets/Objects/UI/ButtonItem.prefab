@@ -145,6 +145,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DescriptionPanel: {fileID: 8353888062508786542, guid: 787e1d5c82a897f48a909ac755023298,
     type: 3}
+  UseItemButtons: {fileID: 939859224308320373, guid: e5f53e4d3a41ce544ba4692739d535c9,
+    type: 3}
+  TargetPrefab: {fileID: 6773575037595768147, guid: f4385aa4d67916e4684dc5d6284fd135,
+    type: 3}
 --- !u!1 &3830179324364818834
 GameObject:
   m_ObjectHideFlags: 0
